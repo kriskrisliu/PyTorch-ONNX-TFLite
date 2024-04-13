@@ -1,6 +1,9 @@
 from timm import list_models
 import timm
 import torch
+from onnx_tf.backend import prepare
+import onnx
+
 
 model_zoo = list_models(pretrained=True)
 model_name = 'vit'
@@ -25,3 +28,10 @@ torch.onnx.export(
     input_names=['input'],   # Input tensor name (arbitary)
     output_names=['output'] # Output tensor name (arbitary)
 )
+
+
+tf_model_path = f'{model_name}.pb'
+
+onnx_model = onnx.load(onnx_model_path)
+tf_rep = prepare(onnx_model)
+tf_rep.export_graph(tf_model_path)
