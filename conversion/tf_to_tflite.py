@@ -1,7 +1,9 @@
 import tensorflow as tf
 
-saved_model_dir = 'vit_small_patch16_224'
-tflite_model_path = 'vit_small_patch16_224.tflite'
+# saved_model_dir = 'vit_small_patch16_224'
+# tflite_model_path = 'vit_small_patch16_224_float32.tflite'
+saved_model_dir = 'resnet50_cpu'
+tflite_model_path = 'resnet50_cpu.tflite'
 
 ## TFLite Conversion
 # Before conversion, fix the model input size
@@ -11,7 +13,11 @@ tf.saved_model.save(model, "saved_model_updated", signatures=model.signatures[tf
 
 # Convert
 converter = tf.lite.TFLiteConverter.from_saved_model(saved_model_dir='saved_model_updated', signature_keys=['serving_default'])
+
 converter.optimizations = [tf.lite.Optimize.DEFAULT]
+# converter.optimizations = []
+# converter.target_spec.supported_types = [tf.float32]
+
 converter.target_spec.supported_ops = [tf.lite.OpsSet.TFLITE_BUILTINS, tf.lite.OpsSet.SELECT_TF_OPS]
 tflite_model = converter.convert()
 
