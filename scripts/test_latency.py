@@ -39,7 +39,8 @@ if args.mode == "tflite":
             "shape":input_shape,
         })
 
-        input_data = np.array(np.random.random_sample(input_shape), dtype=np.float32)
+        dtype = np.uint8 if "int8" in args.model_path else np.float32
+        input_data = np.array(np.random.random_sample(input_shape), dtype=dtype)
         interpreter.set_tensor(input_details[0]['index'], input_data)
         
         start_time = time.time()  # Start time
