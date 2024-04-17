@@ -31,3 +31,12 @@ pip install -U tf-keras~=2.16
 #     # Execute the conversion command
 #     onnx2tf -i "model_zoo/${ONNX_MODEL}.onnx" -osd --output_integer_quantized_tflite --output_folder_path "$OUTPUT_PATH"
 # done
+
+
+declare -a tfl_files=("resnet18-v1-7" "resnet50-v1-7" "ssd-10" "vgg16-12" "resnet101-v1-7" "resnet34-v1-7" "ssd-12" "vgg19-7")
+for TFL in "${tfl_files[@]}"
+do
+    python scripts/test_latency.py -i 10 -m output/${TFL}/${TFL}_integer_quant.tflite --mode tflite
+    python scripts/test_latency.py -i 10 -m output/${TFL}/${TFL}_float32.tflite --mode tflite
+    echo "--------------------------------------"
+done
