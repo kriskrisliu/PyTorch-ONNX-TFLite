@@ -48,7 +48,7 @@ onnx2tf -i <model>.onnx  -osd \
 --output_folder_path <some-place> 
 ```
 
-You can find model variants such as:
+You can find model variants in `output_folder_path`, including:
 ```bash
 resnet18-v1-7_full_integer_quant_with_int16_act.tflite
 fingerprint.pb
