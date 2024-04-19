@@ -16,3 +16,6 @@ done
 
 # inference for acc
 python scripts/test_imagenet_acc.py -mode tflite -m output/resnet18-v1-7/resnet18-v1-7_float32.tflite -d /data-hdd/ImageNet_2012_DataSets/val/
+
+# torch to onnx
+turnkey resnet18.py
