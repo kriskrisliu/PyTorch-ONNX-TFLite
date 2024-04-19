@@ -6,7 +6,9 @@ Convert PyTorch Models to TFLite and run inference in TFLite Python API.
 
 ## PyTorch to ONNX
 
-Go to [onnx/models](https://github.com/onnx/models) to find the target model's `turnkey_stats.yaml` file. Install python environment according to `Python Packages` in the yaml.
+Go to [onnx/models](https://github.com/onnx/models) to find the target model's `turnkey_stats.yaml` file. 
+
+Install python environment according to `Python Packages` in the yaml.
 
 ```yaml
 
@@ -30,6 +32,10 @@ system_info:
   - tornado==6.3.3
 task: Computer_Vision
 ```
+Download `builtin_model_script` given by the yaml file. Use turnkey to run the .py file.
+```bash
+turnkey <model>.py
+```
 
 
 ## ONNX to TF
@@ -42,7 +48,7 @@ onnx2tf -i <model>.onnx  -osd \
 --output_folder_path <some-place> 
 ```
 
-You can find model variants such as:
+You can find model variants in `output_folder_path`, including:
 ```bash
 resnet18-v1-7_full_integer_quant_with_int16_act.tflite
 fingerprint.pb
